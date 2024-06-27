@@ -1,1 +1,1 @@
-test.o: ../test.cpp
+test.o: ../test.cpp ../bmp.hpp
