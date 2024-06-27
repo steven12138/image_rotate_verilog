@@ -29,8 +29,8 @@
                     <option name="source" value="sram.v" />
                   </Body>
                   <Body>
-                    <option name="offset" value="87" />
-                    <option name="replacementList" value="20 //Size of RAM address" />
+                    <option name="offset" value="89" />
+                    <option name="replacementList" value="20 // Size of RAM address" />
                     <option name="source" value="adapter.v" />
                   </Body>
                 </list>
@@ -54,8 +54,8 @@
                     <option name="source" value="sram.v" />
                   </Body>
                   <Body>
-                    <option name="offset" value="44" />
-                    <option name="replacementList" value="1024*1024 //Depth of RAM" />
+                    <option name="offset" value="45" />
+                    <option name="replacementList" value="1024*1024 // Depth of RAM" />
                     <option name="source" value="adapter.v" />
                   </Body>
                 </list>
@@ -75,7 +75,7 @@
                   </Body>
                   <Body>
                     <option name="offset" value="8" />
-                    <option name="replacementList" value="32 //Width of RAM" />
+                    <option name="replacementList" value="32 // Width of RAM" />
                     <option name="source" value="adapter.v" />
                   </Body>
                 </list>

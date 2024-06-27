@@ -177,6 +177,8 @@ VL_ATTR_COLD void Vadapter___024root___ctor_var_reset(Vadapter___024root* vlSelf
     vlSelf->adapter__DOT__x = VL_RAND_RESET_I(8);
     vlSelf->adapter__DOT__y = VL_RAND_RESET_I(8);
     vlSelf->adapter__DOT__addr = VL_RAND_RESET_I(20);
+    vlSelf->adapter__DOT__cycle_count = VL_RAND_RESET_I(32);
+    vlSelf->adapter__DOT__img_width = VL_RAND_RESET_I(8);
     vlSelf->adapter__DOT__mem_out = VL_RAND_RESET_I(32);
     for (int __Vi0 = 0; __Vi0 < 1048576; ++__Vi0) {
         vlSelf->adapter__DOT__ram__DOT__mem[__Vi0] = VL_RAND_RESET_I(32);

@@ -63,103 +63,95 @@ VL_INLINE_OPT void Vadapter___024root___nba_sequent__TOP__1(Vadapter___024root* 
     Vadapter__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vadapter___024root___nba_sequent__TOP__1\n"); );
     // Init
-    CData/*7:0*/ __Vdly__adapter__DOT__y;
-    __Vdly__adapter__DOT__y = 0;
-    CData/*7:0*/ __Vdly__adapter__DOT__x;
-    __Vdly__adapter__DOT__x = 0;
     CData/*2:0*/ __Vdly__adapter__DOT__next_state;
     __Vdly__adapter__DOT__next_state = 0;
+    IData/*31:0*/ __Vdly__adapter__DOT__cycle_count;
+    __Vdly__adapter__DOT__cycle_count = 0;
+    CData/*7:0*/ __Vdly__adapter__DOT__img_width;
+    __Vdly__adapter__DOT__img_width = 0;
+    CData/*7:0*/ __Vdly__adapter__DOT__x;
+    __Vdly__adapter__DOT__x = 0;
+    CData/*7:0*/ __Vdly__adapter__DOT__y;
+    __Vdly__adapter__DOT__y = 0;
     // Body
+    __Vdly__adapter__DOT__img_width = vlSelf->adapter__DOT__img_width;
+    __Vdly__adapter__DOT__cycle_count = vlSelf->adapter__DOT__cycle_count;
     __Vdly__adapter__DOT__next_state = vlSelf->adapter__DOT__next_state;
-    __Vdly__adapter__DOT__x = vlSelf->adapter__DOT__x;
     __Vdly__adapter__DOT__y = vlSelf->adapter__DOT__y;
-    if ((1U & (~ (IData)(vlSelf->rst)))) {
-        if ((1U & (~ ((IData)(vlSelf->adapter__DOT__state) 
-                      >> 2U)))) {
-            if ((2U & (IData)(vlSelf->adapter__DOT__state))) {
-                vlSelf->jump_out = (1U & (IData)(vlSelf->adapter__DOT__state));
-            }
-        }
-    }
+    __Vdly__adapter__DOT__x = vlSelf->adapter__DOT__x;
     if (vlSelf->rst) {
         __Vdly__adapter__DOT__next_state = 0U;
+        __Vdly__adapter__DOT__cycle_count = 0U;
+        __Vdly__adapter__DOT__img_width = 0U;
         __Vdly__adapter__DOT__x = 0U;
         __Vdly__adapter__DOT__y = 0U;
+        vlSelf->jump_out = 0U;
         vlSelf->adapter__DOT__state = 0U;
     } else {
         if ((4U & (IData)(vlSelf->adapter__DOT__state))) {
-            __Vdly__adapter__DOT__next_state = ((2U 
-                                                 & (IData)(vlSelf->adapter__DOT__state))
-                                                 ? 0U
-                                                 : 
-                                                ((1U 
-                                                  & (IData)(vlSelf->adapter__DOT__state))
-                                                  ? 4U
-                                                  : 
-                                                 ((IData)(vlSelf->jump_in)
-                                                   ? 5U
-                                                   : 4U)));
-            if ((1U & (~ ((IData)(vlSelf->adapter__DOT__state) 
-                          >> 1U)))) {
-                if ((1U & (~ (IData)(vlSelf->adapter__DOT__state)))) {
-                    if (vlSelf->jump_in) {
-                        __Vdly__adapter__DOT__x = 0U;
-                        __Vdly__adapter__DOT__y = (0xffU 
-                                                   & ((IData)(1U) 
-                                                      + (IData)(vlSelf->adapter__DOT__y)));
-                    } else {
-                        __Vdly__adapter__DOT__x = (0xffU 
-                                                   & ((IData)(1U) 
-                                                      + (IData)(vlSelf->adapter__DOT__x)));
-                    }
-                }
-            }
-        } else if ((2U & (IData)(vlSelf->adapter__DOT__state))) {
-            __Vdly__adapter__DOT__next_state = ((1U 
-                                                 & (IData)(vlSelf->adapter__DOT__state))
-                                                 ? 2U
-                                                 : 
-                                                ((IData)(vlSelf->jump_in)
-                                                  ? 3U
-                                                  : 2U));
-            if ((1U & (~ (IData)(vlSelf->adapter__DOT__state)))) {
-                if (vlSelf->jump_in) {
-                    __Vdly__adapter__DOT__x = 0U;
+            if ((2U & (IData)(vlSelf->adapter__DOT__state))) {
+                __Vdly__adapter__DOT__next_state = 0U;
+            } else if ((1U & (IData)(vlSelf->adapter__DOT__state))) {
+                __Vdly__adapter__DOT__next_state = 4U;
+            } else {
+                if (((IData)(vlSelf->adapter__DOT__x) 
+                     == (IData)(vlSelf->adapter__DOT__img_width))) {
                     __Vdly__adapter__DOT__y = (0xffU 
                                                & ((IData)(1U) 
                                                   + (IData)(vlSelf->adapter__DOT__y)));
+                    vlSelf->jump_out = 1U;
+                    __Vdly__adapter__DOT__x = 0U;
+                    __Vdly__adapter__DOT__next_state = 5U;
                 } else {
                     __Vdly__adapter__DOT__x = (0xffU 
                                                & ((IData)(1U) 
                                                   + (IData)(vlSelf->adapter__DOT__x)));
+                    vlSelf->jump_out = 0U;
+                }
+                if (vlSelf->jump_in) {
+                    __Vdly__adapter__DOT__img_width 
+                        = (0xffU & vlSelf->adapter__DOT__cycle_count);
+                    __Vdly__adapter__DOT__cycle_count = 0U;
+                } else {
+                    __Vdly__adapter__DOT__cycle_count 
+                        = ((IData)(1U) + vlSelf->adapter__DOT__cycle_count);
                 }
             }
+        } else if ((2U & (IData)(vlSelf->adapter__DOT__state))) {
+            if ((1U & (IData)(vlSelf->adapter__DOT__state))) {
+                __Vdly__adapter__DOT__next_state = 2U;
+            } else if (((IData)(vlSelf->adapter__DOT__x) 
+                        == (IData)(vlSelf->adapter__DOT__img_width))) {
+                __Vdly__adapter__DOT__y = (0xffU & 
+                                           ((IData)(1U) 
+                                            + (IData)(vlSelf->adapter__DOT__y)));
+                vlSelf->jump_out = 1U;
+                __Vdly__adapter__DOT__x = 0U;
+                __Vdly__adapter__DOT__next_state = 3U;
+            } else {
+                __Vdly__adapter__DOT__x = (0xffU & 
+                                           ((IData)(1U) 
+                                            + (IData)(vlSelf->adapter__DOT__x)));
+                vlSelf->jump_out = 0U;
+            }
+        } else if ((1U & (IData)(vlSelf->adapter__DOT__state))) {
+            __Vdly__adapter__DOT__next_state = 0U;
+        } else if (((IData)(vlSelf->start_in) & (~ (IData)(vlSelf->mode)))) {
+            __Vdly__adapter__DOT__next_state = 4U;
+            __Vdly__adapter__DOT__x = 0U;
+            __Vdly__adapter__DOT__y = 0U;
+            __Vdly__adapter__DOT__cycle_count = 0U;
+        } else if (((IData)(vlSelf->start_in) & (IData)(vlSelf->mode))) {
+            __Vdly__adapter__DOT__next_state = 2U;
+            __Vdly__adapter__DOT__x = 0U;
+            __Vdly__adapter__DOT__y = 0U;
         } else {
-            __Vdly__adapter__DOT__next_state = ((1U 
-                                                 & (IData)(vlSelf->adapter__DOT__state))
-                                                 ? 0U
-                                                 : 
-                                                (((IData)(vlSelf->start_in) 
-                                                  & (~ (IData)(vlSelf->mode)))
-                                                  ? 4U
-                                                  : 
-                                                 (((IData)(vlSelf->start_in) 
-                                                   & (IData)(vlSelf->mode))
-                                                   ? 2U
-                                                   : 0U)));
-            if ((1U & (~ (IData)(vlSelf->adapter__DOT__state)))) {
-                if (((IData)(vlSelf->start_in) & (~ (IData)(vlSelf->mode)))) {
-                    __Vdly__adapter__DOT__x = 0U;
-                    __Vdly__adapter__DOT__y = 0U;
-                } else if (((IData)(vlSelf->start_in) 
-                            & (IData)(vlSelf->mode))) {
-                    __Vdly__adapter__DOT__x = 0U;
-                    __Vdly__adapter__DOT__y = 0U;
-                }
-            }
+            __Vdly__adapter__DOT__next_state = 0U;
         }
         vlSelf->adapter__DOT__state = vlSelf->adapter__DOT__next_state;
     }
+    vlSelf->adapter__DOT__cycle_count = __Vdly__adapter__DOT__cycle_count;
+    vlSelf->adapter__DOT__img_width = __Vdly__adapter__DOT__img_width;
     vlSelf->adapter__DOT__x = __Vdly__adapter__DOT__x;
     vlSelf->adapter__DOT__y = __Vdly__adapter__DOT__y;
     vlSelf->adapter__DOT__addr = (((IData)(vlSelf->adapter__DOT__x) 
