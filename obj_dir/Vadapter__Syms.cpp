@@ -18,7 +18,7 @@ Vadapter__Syms::Vadapter__Syms(VerilatedContext* contextp, const char* namep, Va
     , TOP{this, namep}
 {
         // Check resources
-        Verilated::stackCheck(61);
+        Verilated::stackCheck(43);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-12);
     _vm_contextp__->timeprecision(-12);

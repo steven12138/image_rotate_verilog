@@ -102,11 +102,35 @@ VL_ATTR_COLD void Vadapter___024root___stl_sequent__TOP__0(Vadapter___024root* v
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vadapter___024root___stl_sequent__TOP__0\n"); );
     // Body
     vlSelf->data_out = (0xffffffU & vlSelf->adapter__DOT__mem_out);
-    vlSelf->adapter__DOT__addr = ((IData)(vlSelf->mode)
-                                   ? (((IData)(vlSelf->adapter__DOT__y) 
-                                       << 8U) | (IData)(vlSelf->adapter__DOT__x))
-                                   : (((IData)(vlSelf->adapter__DOT__x) 
-                                       << 8U) | (IData)(vlSelf->adapter__DOT__y)));
+    if (vlSelf->mode) {
+        if ((0xffU == (IData)(vlSelf->adapter__DOT__x))) {
+            vlSelf->adapter__DOT__next_x = (0xffU & 0U);
+            vlSelf->adapter__DOT__next_y = (0xffU & 
+                                            ((IData)(1U) 
+                                             + (IData)(vlSelf->adapter__DOT__y)));
+        } else {
+            vlSelf->adapter__DOT__next_x = (0xffU & 
+                                            ((IData)(1U) 
+                                             + (IData)(vlSelf->adapter__DOT__x)));
+            vlSelf->adapter__DOT__next_y = (0xffU & (IData)(vlSelf->adapter__DOT__y));
+        }
+        vlSelf->adapter__DOT__addr = (((IData)(vlSelf->adapter__DOT__y) 
+                                       << 8U) | (IData)(vlSelf->adapter__DOT__x));
+    } else {
+        if ((0xffU == (IData)(vlSelf->adapter__DOT__x))) {
+            vlSelf->adapter__DOT__next_x = (0xffU & 0U);
+            vlSelf->adapter__DOT__next_y = (0xffU & 
+                                            ((IData)(1U) 
+                                             + (IData)(vlSelf->adapter__DOT__y)));
+        } else {
+            vlSelf->adapter__DOT__next_x = (0xffU & 
+                                            ((IData)(1U) 
+                                             + (IData)(vlSelf->adapter__DOT__x)));
+            vlSelf->adapter__DOT__next_y = (0xffU & (IData)(vlSelf->adapter__DOT__y));
+        }
+        vlSelf->adapter__DOT__addr = (((IData)(vlSelf->adapter__DOT__x) 
+                                       << 8U) | (IData)(vlSelf->adapter__DOT__y));
+    }
 }
 
 VL_ATTR_COLD void Vadapter___024root___eval_triggers__stl(Vadapter___024root* vlSelf);
@@ -151,10 +175,10 @@ VL_ATTR_COLD void Vadapter___024root___dump_triggers__act(Vadapter___024root* vl
         VL_DBG_MSGF("         No triggers active\n");
     }
     if ((1ULL & vlSelf->__VactTriggered.word(0U))) {
-        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge clk or posedge rst)\n");
+        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge clk)\n");
     }
     if ((2ULL & vlSelf->__VactTriggered.word(0U))) {
-        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge clk)\n");
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge clk or posedge rst)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -169,10 +193,10 @@ VL_ATTR_COLD void Vadapter___024root___dump_triggers__nba(Vadapter___024root* vl
         VL_DBG_MSGF("         No triggers active\n");
     }
     if ((1ULL & vlSelf->__VnbaTriggered.word(0U))) {
-        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge clk or posedge rst)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge clk)\n");
     }
     if ((2ULL & vlSelf->__VnbaTriggered.word(0U))) {
-        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge clk)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge clk or posedge rst)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -190,13 +214,11 @@ VL_ATTR_COLD void Vadapter___024root___ctor_var_reset(Vadapter___024root* vlSelf
     vlSelf->jump_in = VL_RAND_RESET_I(1);
     vlSelf->data_out = VL_RAND_RESET_I(24);
     vlSelf->jump_out = VL_RAND_RESET_I(1);
-    vlSelf->adapter__DOT__state = VL_RAND_RESET_I(3);
-    vlSelf->adapter__DOT__next_state = VL_RAND_RESET_I(3);
     vlSelf->adapter__DOT__x = VL_RAND_RESET_I(8);
+    vlSelf->adapter__DOT__next_x = VL_RAND_RESET_I(8);
     vlSelf->adapter__DOT__y = VL_RAND_RESET_I(8);
+    vlSelf->adapter__DOT__next_y = VL_RAND_RESET_I(8);
     vlSelf->adapter__DOT__addr = VL_RAND_RESET_I(20);
-    vlSelf->adapter__DOT__cycle_count = VL_RAND_RESET_I(32);
-    vlSelf->adapter__DOT__img_width = VL_RAND_RESET_I(8);
     vlSelf->adapter__DOT__mem_out = VL_RAND_RESET_I(32);
     for (int __Vi0 = 0; __Vi0 < 1048576; ++__Vi0) {
         vlSelf->adapter__DOT__ram__DOT__mem[__Vi0] = VL_RAND_RESET_I(32);

@@ -18,20 +18,10 @@ module adapter(
         $display("Hello World!");
     end
 
-    //  [is_write, is_read, is_endl]
-    parameter IDLE = 3'b000,
-              WRITE_NEXT = 3'b100,
-              READ_NEXT = 3'b010,
-              WRITE_ENDLINE = 3'b101,
-              READ_ENDLINE = 3'b011;
-
-    reg [2:0] state, next_state;
-    reg [7:0] x;
-    reg [7:0] y;
+    reg [7:0] x, next_x;
+    reg [7:0] y, next_y;
     reg [19:0] addr;
     reg [31:0] mem_in;
-    reg [31:0] cycle_count;
-    reg [7:0] img_width; // Dynamic image width
 
     /* verilator lint_off UNUSEDSIGNAL */
     reg [31:0] mem_out;
@@ -45,76 +35,44 @@ module adapter(
         .data_out(mem_out)
     );
 
+    always @(posedge clk) begin
+        $display("x: %d, y: %d, addr: %h, data_in: %h, data_out: %h, jump_out: %h", x, y, addr, mem_in, mem_out, jump_out);
+        $display("start_in %b, mode %b, jump_in %b", start_in, mode, jump_in);
+    end
+
     always @(posedge clk or posedge rst) begin
         if (rst) begin
-            state <= IDLE;
-            next_state <= IDLE;
-            cycle_count <= 0;
-            img_width <= 0;
             x <= 0;
             y <= 0;
             jump_out <= 0;
         end else begin
-            case (state)
-                IDLE: begin
-                    if (start_in == 1'b1 && mode == 1'b0) begin
-                        next_state <= WRITE_NEXT;
-                        x <= 0;
-                        y <= 0;
-                        cycle_count <= 0;
-                    end
-                    else if (start_in == 1'b1 && mode == 1'b1) begin
-                        next_state <= READ_NEXT;
-                        x <= 0;
-                        y <= 0;
-                    end
-                    else begin
-                        next_state <= IDLE;
-                    end
-                end
-                WRITE_NEXT: begin
-                    if (x == img_width) begin
-                        jump_out <= 1'b1;
-                        x <= 0;
-                        y <= y+1;
-                        $display("read next");
-                        next_state <= WRITE_ENDLINE;
-                    end else begin
-                        jump_out <= 1'b0;
-                        x <= x+1;
-                    end
-                    if (jump_in == 1'b1) begin
-                        img_width <= cycle_count[7:0]; // Set image width when a line ends
-                        cycle_count <= 0;
-                    end else begin
-                        cycle_count <= cycle_count+1;
-                    end
-                end
-                WRITE_ENDLINE: begin
-                    next_state <= WRITE_NEXT;
-                end
-                READ_NEXT: begin
-                    if (x == img_width) begin
-                        jump_out <= 1'b1;
-                        x <= 0;
-                        y <= y+1;
-                        next_state <= READ_ENDLINE;
-                    end else begin
-                        jump_out <= 1'b0;
-                        x <= x+1;
-                    end
-                end
-                READ_ENDLINE: begin
-                    next_state <= READ_NEXT;
-                end
-                default: next_state <= IDLE;
-            endcase
-
-            state <= next_state;
+            x <= next_x;
+            y <= next_y;
+            jump_out <= (next_x == 0) ? 1'b1 : 1'b0; // Update jump_out only here
         end
     end
 
-    assign addr = (mode == 1'b0) ? {4'b0, x, y}:{4'b0, y, x};
+    always @(*) begin
+        if (mode == 1'b0) begin
+            if (x == 8'd255) begin
+                next_x = 0;
+                next_y = y + 1;
+            end else begin
+                next_x = x + 1;
+                next_y = y;
+            end
+        end else begin
+            if (x == 8'd255) begin
+                next_x = 0;
+                next_y = y + 1;
+            end else begin
+                next_x = x + 1;
+                next_y = y;
+            end
+        end
+    end
+
+    assign addr = (mode == 1'b0) ? {4'b0, x, y} : {4'b0, y, x};
     assign mem_in = {8'b0, data_in};
     assign data_out = mem_out[23:0];
 

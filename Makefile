@@ -9,15 +9,15 @@ CPP_SRC=$(wildcard *.cpp *.hpp)
 
 VERILOG_FLAGS= --cc --exe -Wall --top-module $(TOP_MODULE)
 
-all: verify compile png2bmp run
+all: run
 
 verify: $(VERILOG_SRC)
 	verilator $(VERILOG_FLAGS) $(VERILOG_SRC) $(CPP_SRC)
 
-compile:
+compile: verify
 	make -j -C $(BUILD_DIR) -f V$(TOP_MODULE).mk V$(TOP_MODULE)
 
-run:
+run: compile
 	./$(BUILD_DIR)/V$(TOP_MODULE)
 
 png2bmp: res/lenna.png

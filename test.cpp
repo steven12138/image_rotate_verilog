@@ -63,15 +63,29 @@ int main(int argc, char **argv) {
             uint8_t g = image[index + 1];
             uint8_t b = image[index + 2];
             top->data_in = (r << 16) | (g << 8) | b;
-            std::cout<<std::hex<<top->data_in<<std::endl;
+            std::cout << std::hex << top->data_in << std::endl;
             top->start_in = 1;
+            top->jump_in = 0; // Default to 0
             top->eval();
             top->clk = 1;
             top->eval();
             top->clk = 0;
             top->eval();
+
+            // Check if end of line
+            if (x == width - 1) {
+                top->jump_in = 1; // Set jump_in to 1 at the end of each line
+                top->eval();
+                top->clk = 1;
+                top->eval();
+                top->clk = 0;
+                top->eval();
+            }
+            int a;
+            cin>>a;
         }
     }
+
 
     // Switch to read mode
     top->rst = 1;
