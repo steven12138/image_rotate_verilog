@@ -28,12 +28,11 @@ class alignas(VL_CACHE_LINE_BYTES) Vadapter VL_NOT_FINAL : public VerilatedModel
     // PORTS
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
+    VL_IN8(&rst,0,0);
+    VL_IN8(&clk,0,0);
     VL_IN8(&mode,0,0);
-    VL_IN8(&clk_in,0,0);
     VL_IN8(&start_in,0,0);
     VL_IN8(&jump_in,0,0);
-    VL_OUT8(&clk_out,0,0);
-    VL_OUT8(&start_out,0,0);
     VL_OUT8(&jump_out,0,0);
     VL_IN(&data_in,23,0);
     VL_OUT(&data_out,23,0);

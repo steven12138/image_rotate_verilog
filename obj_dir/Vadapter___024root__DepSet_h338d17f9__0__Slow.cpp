@@ -19,6 +19,8 @@ VL_ATTR_COLD void Vadapter___024root___eval_initial(Vadapter___024root* vlSelf) 
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vadapter___024root___eval_initial\n"); );
     // Body
     Vadapter___024root___eval_initial__TOP(vlSelf);
+    vlSelf->__Vtrigprevexpr___TOP__clk__0 = vlSelf->clk;
+    vlSelf->__Vtrigprevexpr___TOP__rst__0 = vlSelf->rst;
 }
 
 VL_ATTR_COLD void Vadapter___024root___eval_initial__TOP(Vadapter___024root* vlSelf) {
@@ -82,7 +84,7 @@ VL_ATTR_COLD void Vadapter___024root___dump_triggers__stl(Vadapter___024root* vl
 }
 #endif  // VL_DEBUG
 
-void Vadapter___024root___ico_sequent__TOP__0(Vadapter___024root* vlSelf);
+VL_ATTR_COLD void Vadapter___024root___stl_sequent__TOP__0(Vadapter___024root* vlSelf);
 
 VL_ATTR_COLD void Vadapter___024root___eval_stl(Vadapter___024root* vlSelf) {
     (void)vlSelf;  // Prevent unused variable warning
@@ -90,8 +92,18 @@ VL_ATTR_COLD void Vadapter___024root___eval_stl(Vadapter___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vadapter___024root___eval_stl\n"); );
     // Body
     if ((1ULL & vlSelf->__VstlTriggered.word(0U))) {
-        Vadapter___024root___ico_sequent__TOP__0(vlSelf);
+        Vadapter___024root___stl_sequent__TOP__0(vlSelf);
     }
+}
+
+VL_ATTR_COLD void Vadapter___024root___stl_sequent__TOP__0(Vadapter___024root* vlSelf) {
+    (void)vlSelf;  // Prevent unused variable warning
+    Vadapter__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vadapter___024root___stl_sequent__TOP__0\n"); );
+    // Body
+    vlSelf->data_out = (0xffffffU & vlSelf->adapter__DOT__mem_out);
+    vlSelf->adapter__DOT__addr = (((IData)(vlSelf->adapter__DOT__x) 
+                                   << 8U) | (IData)(vlSelf->adapter__DOT__y));
 }
 
 VL_ATTR_COLD void Vadapter___024root___eval_triggers__stl(Vadapter___024root* vlSelf);
@@ -112,21 +124,6 @@ VL_ATTR_COLD bool Vadapter___024root___eval_phase__stl(Vadapter___024root* vlSel
 }
 
 #ifdef VL_DEBUG
-VL_ATTR_COLD void Vadapter___024root___dump_triggers__ico(Vadapter___024root* vlSelf) {
-    (void)vlSelf;  // Prevent unused variable warning
-    Vadapter__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vadapter___024root___dump_triggers__ico\n"); );
-    // Body
-    if ((1U & (~ vlSelf->__VicoTriggered.any()))) {
-        VL_DBG_MSGF("         No triggers active\n");
-    }
-    if ((1ULL & vlSelf->__VicoTriggered.word(0U))) {
-        VL_DBG_MSGF("         'ico' region trigger index 0 is active: Internal 'ico' trigger - first iteration\n");
-    }
-}
-#endif  // VL_DEBUG
-
-#ifdef VL_DEBUG
 VL_ATTR_COLD void Vadapter___024root___dump_triggers__act(Vadapter___024root* vlSelf) {
     (void)vlSelf;  // Prevent unused variable warning
     Vadapter__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
@@ -134,6 +131,12 @@ VL_ATTR_COLD void Vadapter___024root___dump_triggers__act(Vadapter___024root* vl
     // Body
     if ((1U & (~ vlSelf->__VactTriggered.any()))) {
         VL_DBG_MSGF("         No triggers active\n");
+    }
+    if ((1ULL & vlSelf->__VactTriggered.word(0U))) {
+        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge clk or posedge rst)\n");
+    }
+    if ((2ULL & vlSelf->__VactTriggered.word(0U))) {
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge clk)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -147,6 +150,12 @@ VL_ATTR_COLD void Vadapter___024root___dump_triggers__nba(Vadapter___024root* vl
     if ((1U & (~ vlSelf->__VnbaTriggered.any()))) {
         VL_DBG_MSGF("         No triggers active\n");
     }
+    if ((1ULL & vlSelf->__VnbaTriggered.word(0U))) {
+        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge clk or posedge rst)\n");
+    }
+    if ((2ULL & vlSelf->__VnbaTriggered.word(0U))) {
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge clk)\n");
+    }
 }
 #endif  // VL_DEBUG
 
@@ -155,13 +164,23 @@ VL_ATTR_COLD void Vadapter___024root___ctor_var_reset(Vadapter___024root* vlSelf
     Vadapter__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vadapter___024root___ctor_var_reset\n"); );
     // Body
+    vlSelf->rst = VL_RAND_RESET_I(1);
     vlSelf->mode = VL_RAND_RESET_I(1);
-    vlSelf->clk_in = VL_RAND_RESET_I(1);
+    vlSelf->clk = VL_RAND_RESET_I(1);
     vlSelf->start_in = VL_RAND_RESET_I(1);
     vlSelf->data_in = VL_RAND_RESET_I(24);
     vlSelf->jump_in = VL_RAND_RESET_I(1);
-    vlSelf->clk_out = VL_RAND_RESET_I(1);
-    vlSelf->start_out = VL_RAND_RESET_I(1);
     vlSelf->data_out = VL_RAND_RESET_I(24);
     vlSelf->jump_out = VL_RAND_RESET_I(1);
+    vlSelf->adapter__DOT__state = VL_RAND_RESET_I(3);
+    vlSelf->adapter__DOT__next_state = VL_RAND_RESET_I(3);
+    vlSelf->adapter__DOT__x = VL_RAND_RESET_I(8);
+    vlSelf->adapter__DOT__y = VL_RAND_RESET_I(8);
+    vlSelf->adapter__DOT__addr = VL_RAND_RESET_I(20);
+    vlSelf->adapter__DOT__mem_out = VL_RAND_RESET_I(32);
+    for (int __Vi0 = 0; __Vi0 < 1048576; ++__Vi0) {
+        vlSelf->adapter__DOT__ram__DOT__mem[__Vi0] = VL_RAND_RESET_I(32);
+    }
+    vlSelf->__Vtrigprevexpr___TOP__clk__0 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__rst__0 = VL_RAND_RESET_I(1);
 }

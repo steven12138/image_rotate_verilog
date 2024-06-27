@@ -9,12 +9,11 @@
 Vadapter::Vadapter(VerilatedContext* _vcontextp__, const char* _vcname__)
     : VerilatedModel{*_vcontextp__}
     , vlSymsp{new Vadapter__Syms(contextp(), _vcname__, this)}
+    , rst{vlSymsp->TOP.rst}
+    , clk{vlSymsp->TOP.clk}
     , mode{vlSymsp->TOP.mode}
-    , clk_in{vlSymsp->TOP.clk_in}
     , start_in{vlSymsp->TOP.start_in}
     , jump_in{vlSymsp->TOP.jump_in}
-    , clk_out{vlSymsp->TOP.clk_out}
-    , start_out{vlSymsp->TOP.start_out}
     , jump_out{vlSymsp->TOP.jump_out}
     , data_in{vlSymsp->TOP.data_in}
     , data_out{vlSymsp->TOP.data_out}
