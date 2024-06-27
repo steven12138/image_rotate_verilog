@@ -11,10 +11,10 @@ VERILOG_FLAGS= --cc --exe -Wall --top-module $(TOP_MODULE)
 
 all: verify compile png2bmp run
 
-test_bmp: png2bmp compile_test run_test
+test_bmp: png2bmp compile_test
 
-compile_test: test_bmp.cpp bmp.hpp
-	g++ test_bmp.cpp bmp.hpp -o test_bmp
+compile_test:
+	g++ test_bmp.cpp -o test_bmp
 
 run_test:
 	./test_bmp ./res/lenna.bmp
@@ -35,5 +35,6 @@ png2bmp: res/lenna.png
 
 clean:
 	rm -rf $(BUILD_DIR)
-	rm output_lenna.bmp
+	rm ./output_lenna.bmp
 	rm ./res/lenna.bmp
+	rm ./output.bmp
