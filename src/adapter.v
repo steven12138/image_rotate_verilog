@@ -77,6 +77,7 @@ module adapter(
                         jump_out <= 1'b1;
                         x <= 0;
                         y <= y+1;
+                        $display("read next");
                         next_state <= WRITE_ENDLINE;
                     end else begin
                         jump_out <= 1'b0;

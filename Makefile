@@ -11,15 +11,6 @@ VERILOG_FLAGS= --cc --exe -Wall --top-module $(TOP_MODULE)
 
 all: verify compile png2bmp run
 
-test_bmp: png2bmp compile_test
-
-compile_test:
-	g++ test_bmp.cpp -o test_bmp
-
-run_test:
-	./test_bmp ./res/lenna.bmp
-
-
 verify: $(VERILOG_SRC)
 	verilator $(VERILOG_FLAGS) $(VERILOG_SRC) $(CPP_SRC)
 
