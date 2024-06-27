@@ -50,10 +50,10 @@ int main(int argc, char **argv) {
 
     top->rst = 1;
     top->clk = 0;
-    top->start_in = 0;
     top->eval();
     top->rst = 0;
     top->eval();
+
 
     // Write image data into the Verilog module
     for (int y = 0; y < height; ++y) {
@@ -64,8 +64,6 @@ int main(int argc, char **argv) {
             uint8_t b = image[index + 2];
             top->data_in = (r << 16) | (g << 8) | b;
             std::cout << std::hex << top->data_in << std::endl;
-            top->start_in = 1;
-            top->jump_in = x==width-1?1:0;
             top->eval();
             top->clk = 1;
             top->eval();
@@ -88,11 +86,10 @@ int main(int argc, char **argv) {
     // Read image data from the Verilog module
     // Read image data from the Verilog module
     for (int y = 0; y < height; ++y) {
-        for (int x = 0; x < width; ++x) {
+        for (int x = 0; x < width; ++x,index+=3) {
             top->eval();
             top->clk = 1;
             top->eval();
-            int index = (y * width + x) * 3;
             output_data[index + 0] = (top->data_out >> 16) & 0xFF; // R
             output_data[index + 1] = (top->data_out >> 8) & 0xFF;  // G
             output_data[index + 2] = top->data_out & 0xFF;         // B

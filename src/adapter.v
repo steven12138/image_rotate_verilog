@@ -6,18 +6,12 @@ module adapter(
     input rst,
     input mode,
     input clk,
-    input start_in,
     input [23:0] data_in, // 8bit-rgb image
-    input jump_in,
 
     output reg [23:0] data_out,
     output reg jump_out,
     output reg output_done // New output signal
 );
-
-    initial begin
-        $display("Hello World!");
-    end
 
     reg [7:0] x, next_x;
     reg [7:0] y, next_y;
@@ -38,7 +32,6 @@ module adapter(
 
     always @(posedge clk) begin
         $display("x: %d, y: %d, addr: %h, data_in: %h, data_out: %h, jump_out: %h, output_done: %b", x, y, addr, mem_in, mem_out, jump_out, output_done);
-        $display("start_in %b, mode %b, jump_in %b", start_in, mode, jump_in);
         $display("mode %b, next_x: %d, next_y: %d", mode, next_x, next_y);
     end
 
@@ -51,17 +44,8 @@ module adapter(
         end else begin
             x <= next_x;
             y <= next_y;
-            jump_out <= (next_x == 0) ? 1'b1:1'b0;
-            if (mode == 1'b1) begin
-                $display("mode 1, next_x: %d, next_y: %d", next_x, next_y);
-                if (next_x == 8'd255 && next_y == 8'd255) begin
-                    output_done <= 1'b1; // Set output_done high when finished
-                end else begin
-                    output_done <= 0;
-                end
-            end else begin
-                output_done <= 0;
-            end
+            jump_out <= (next_x == 8'd255) ? 1'b1:1'b0;
+            output_done <= (next_x == 8'd255 && next_y == 8'd255 && mode == 1'b1) ? 1'b1:0;
         end
     end
 

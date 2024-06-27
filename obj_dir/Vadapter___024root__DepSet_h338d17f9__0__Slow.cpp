@@ -11,24 +11,13 @@ VL_ATTR_COLD void Vadapter___024root___eval_static(Vadapter___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vadapter___024root___eval_static\n"); );
 }
 
-VL_ATTR_COLD void Vadapter___024root___eval_initial__TOP(Vadapter___024root* vlSelf);
-
 VL_ATTR_COLD void Vadapter___024root___eval_initial(Vadapter___024root* vlSelf) {
     (void)vlSelf;  // Prevent unused variable warning
     Vadapter__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vadapter___024root___eval_initial\n"); );
     // Body
-    Vadapter___024root___eval_initial__TOP(vlSelf);
     vlSelf->__Vtrigprevexpr___TOP__clk__0 = vlSelf->clk;
     vlSelf->__Vtrigprevexpr___TOP__rst__0 = vlSelf->rst;
-}
-
-VL_ATTR_COLD void Vadapter___024root___eval_initial__TOP(Vadapter___024root* vlSelf) {
-    (void)vlSelf;  // Prevent unused variable warning
-    Vadapter__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vadapter___024root___eval_initial__TOP\n"); );
-    // Body
-    VL_WRITEF_NX("Hello World!\n",0);
 }
 
 VL_ATTR_COLD void Vadapter___024root___eval_final(Vadapter___024root* vlSelf) {
@@ -211,9 +200,7 @@ VL_ATTR_COLD void Vadapter___024root___ctor_var_reset(Vadapter___024root* vlSelf
     vlSelf->rst = VL_RAND_RESET_I(1);
     vlSelf->mode = VL_RAND_RESET_I(1);
     vlSelf->clk = VL_RAND_RESET_I(1);
-    vlSelf->start_in = VL_RAND_RESET_I(1);
     vlSelf->data_in = VL_RAND_RESET_I(24);
-    vlSelf->jump_in = VL_RAND_RESET_I(1);
     vlSelf->data_out = VL_RAND_RESET_I(24);
     vlSelf->jump_out = VL_RAND_RESET_I(1);
     vlSelf->output_done = VL_RAND_RESET_I(1);
