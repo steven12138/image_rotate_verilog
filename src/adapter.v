@@ -11,7 +11,8 @@ module adapter(
     input jump_in,
 
     output reg [23:0] data_out,
-    output reg jump_out
+    output reg jump_out,
+    output reg output_done // New output signal
 );
 
     initial begin
@@ -36,8 +37,9 @@ module adapter(
     );
 
     always @(posedge clk) begin
-        $display("x: %d, y: %d, addr: %h, data_in: %h, data_out: %h, jump_out: %h", x, y, addr, mem_in, mem_out, jump_out);
+        $display("x: %d, y: %d, addr: %h, data_in: %h, data_out: %h, jump_out: %h, output_done: %b", x, y, addr, mem_in, mem_out, jump_out, output_done);
         $display("start_in %b, mode %b, jump_in %b", start_in, mode, jump_in);
+        $display("mode %b, next_x: %d, next_y: %d", mode, next_x, next_y);
     end
 
     always @(posedge clk or posedge rst) begin
@@ -45,10 +47,21 @@ module adapter(
             x <= 0;
             y <= 0;
             jump_out <= 0;
+            output_done <= 0; // Initialize output_done
         end else begin
             x <= next_x;
             y <= next_y;
-            jump_out <= (next_x == 0) ? 1'b1 : 1'b0; // Update jump_out only here
+            jump_out <= (next_x == 0) ? 1'b1:1'b0;
+            if (mode == 1'b1) begin
+                $display("mode 1, next_x: %d, next_y: %d", next_x, next_y);
+                if (next_x == 8'd255 && next_y == 8'd255) begin
+                    output_done <= 1'b1; // Set output_done high when finished
+                end else begin
+                    output_done <= 0;
+                end
+            end else begin
+                output_done <= 0;
+            end
         end
     end
 
@@ -56,23 +69,24 @@ module adapter(
         if (mode == 1'b0) begin
             if (x == 8'd255) begin
                 next_x = 0;
-                next_y = y + 1;
+                next_y = y+1;
             end else begin
-                next_x = x + 1;
+                next_x = x+1;
                 next_y = y;
             end
         end else begin
             if (x == 8'd255) begin
                 next_x = 0;
-                next_y = y + 1;
+                next_y = y+1;
             end else begin
-                next_x = x + 1;
+                next_x = x+1;
                 next_y = y;
             end
         end
     end
 
-    assign addr = (mode == 1'b0) ? {4'b0, x, y} : {4'b0, y, x};
+    // Transform the address for 90-degree rotation
+    assign addr = (mode == 1'b0) ? {4'b0, x, y}:{4'b0, y, 8'd255-x};
     assign mem_in = {8'b0, data_in};
     assign data_out = mem_out[23:0];
 

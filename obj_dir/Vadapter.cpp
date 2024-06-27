@@ -15,6 +15,7 @@ Vadapter::Vadapter(VerilatedContext* _vcontextp__, const char* _vcname__)
     , start_in{vlSymsp->TOP.start_in}
     , jump_in{vlSymsp->TOP.jump_in}
     , jump_out{vlSymsp->TOP.jump_out}
+    , output_done{vlSymsp->TOP.output_done}
     , data_in{vlSymsp->TOP.data_in}
     , data_out{vlSymsp->TOP.data_out}
     , rootp{&(vlSymsp->TOP)}

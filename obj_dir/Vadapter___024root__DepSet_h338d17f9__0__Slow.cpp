@@ -115,7 +115,9 @@ VL_ATTR_COLD void Vadapter___024root___stl_sequent__TOP__0(Vadapter___024root* v
             vlSelf->adapter__DOT__next_y = (0xffU & (IData)(vlSelf->adapter__DOT__y));
         }
         vlSelf->adapter__DOT__addr = (((IData)(vlSelf->adapter__DOT__y) 
-                                       << 8U) | (IData)(vlSelf->adapter__DOT__x));
+                                       << 8U) | (0xffU 
+                                                 & ((IData)(0xffU) 
+                                                    - (IData)(vlSelf->adapter__DOT__x))));
     } else {
         if ((0xffU == (IData)(vlSelf->adapter__DOT__x))) {
             vlSelf->adapter__DOT__next_x = (0xffU & 0U);
@@ -214,6 +216,7 @@ VL_ATTR_COLD void Vadapter___024root___ctor_var_reset(Vadapter___024root* vlSelf
     vlSelf->jump_in = VL_RAND_RESET_I(1);
     vlSelf->data_out = VL_RAND_RESET_I(24);
     vlSelf->jump_out = VL_RAND_RESET_I(1);
+    vlSelf->output_done = VL_RAND_RESET_I(1);
     vlSelf->adapter__DOT__x = VL_RAND_RESET_I(8);
     vlSelf->adapter__DOT__next_x = VL_RAND_RESET_I(8);
     vlSelf->adapter__DOT__y = VL_RAND_RESET_I(8);

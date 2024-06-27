@@ -20,6 +20,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vadapter___024root final : public VerilatedMo
     VL_IN8(start_in,0,0);
     VL_IN8(jump_in,0,0);
     VL_OUT8(jump_out,0,0);
+    VL_OUT8(output_done,0,0);
     CData/*7:0*/ adapter__DOT__x;
     CData/*7:0*/ adapter__DOT__next_x;
     CData/*7:0*/ adapter__DOT__y;

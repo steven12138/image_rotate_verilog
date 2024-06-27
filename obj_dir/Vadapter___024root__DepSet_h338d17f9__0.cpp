@@ -35,7 +35,9 @@ VL_INLINE_OPT void Vadapter___024root___ico_sequent__TOP__0(Vadapter___024root* 
             vlSelf->adapter__DOT__next_y = (0xffU & (IData)(vlSelf->adapter__DOT__y));
         }
         vlSelf->adapter__DOT__addr = (((IData)(vlSelf->adapter__DOT__y) 
-                                       << 8U) | (IData)(vlSelf->adapter__DOT__x));
+                                       << 8U) | (0xffU 
+                                                 & ((IData)(0xffU) 
+                                                    - (IData)(vlSelf->adapter__DOT__x))));
     } else {
         if ((0xffU == (IData)(vlSelf->adapter__DOT__x))) {
             vlSelf->adapter__DOT__next_x = (0xffU & 0U);
@@ -105,12 +107,15 @@ VL_INLINE_OPT void Vadapter___024root___nba_sequent__TOP__0(Vadapter___024root* 
     __VdlySet__adapter__DOT__ram__DOT__mem__v0 = 0;
     // Body
     __VdlySet__adapter__DOT__ram__DOT__mem__v0 = 0U;
-    VL_WRITEF_NX("x: %3#, y: %3#, addr: %x, data_in: %x, data_out: %x, jump_out: %x\nstart_in %b, mode %b, jump_in %b\n",0,
+    VL_WRITEF_NX("x: %3#, y: %3#, addr: %x, data_in: %x, data_out: %x, jump_out: %x, output_done: %b\nstart_in %b, mode %b, jump_in %b\nmode %b, next_x: %3#, next_y: %3#\n",0,
                  8,vlSelf->adapter__DOT__x,8,(IData)(vlSelf->adapter__DOT__y),
                  20,vlSelf->adapter__DOT__addr,32,vlSelf->data_in,
                  32,vlSelf->adapter__DOT__mem_out,1,
-                 (IData)(vlSelf->jump_out),1,vlSelf->start_in,
-                 1,(IData)(vlSelf->mode),1,vlSelf->jump_in);
+                 (IData)(vlSelf->jump_out),1,vlSelf->output_done,
+                 1,(IData)(vlSelf->start_in),1,vlSelf->mode,
+                 1,(IData)(vlSelf->jump_in),1,vlSelf->mode,
+                 8,(IData)(vlSelf->adapter__DOT__next_x),
+                 8,vlSelf->adapter__DOT__next_y);
     if ((1U & (~ (IData)(vlSelf->mode)))) {
         __VdlyVal__adapter__DOT__ram__DOT__mem__v0 
             = vlSelf->data_in;
@@ -134,14 +139,24 @@ VL_INLINE_OPT void Vadapter___024root___nba_sequent__TOP__1(Vadapter___024root* 
     Vadapter__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vadapter___024root___nba_sequent__TOP__1\n"); );
     // Body
-    vlSelf->jump_out = ((1U & (~ (IData)(vlSelf->rst))) 
-                        && (0U == (IData)(vlSelf->adapter__DOT__next_x)));
     if (vlSelf->rst) {
-        vlSelf->adapter__DOT__y = 0U;
         vlSelf->adapter__DOT__x = 0U;
+        vlSelf->adapter__DOT__y = 0U;
+        vlSelf->jump_out = 0U;
+        vlSelf->output_done = 0U;
     } else {
-        vlSelf->adapter__DOT__y = vlSelf->adapter__DOT__next_y;
         vlSelf->adapter__DOT__x = vlSelf->adapter__DOT__next_x;
+        vlSelf->adapter__DOT__y = vlSelf->adapter__DOT__next_y;
+        vlSelf->jump_out = (0U == (IData)(vlSelf->adapter__DOT__next_x));
+        if (VL_UNLIKELY(vlSelf->mode)) {
+            VL_WRITEF_NX("mode 1, next_x: %3#, next_y: %3#\n",0,
+                         8,vlSelf->adapter__DOT__next_x,
+                         8,(IData)(vlSelf->adapter__DOT__next_y));
+            vlSelf->output_done = ((0xffU == (IData)(vlSelf->adapter__DOT__next_x)) 
+                                   & (0xffU == (IData)(vlSelf->adapter__DOT__next_y)));
+        } else {
+            vlSelf->output_done = 0U;
+        }
     }
     if (vlSelf->mode) {
         if ((0xffU == (IData)(vlSelf->adapter__DOT__x))) {
@@ -156,7 +171,9 @@ VL_INLINE_OPT void Vadapter___024root___nba_sequent__TOP__1(Vadapter___024root* 
             vlSelf->adapter__DOT__next_y = (0xffU & (IData)(vlSelf->adapter__DOT__y));
         }
         vlSelf->adapter__DOT__addr = (((IData)(vlSelf->adapter__DOT__y) 
-                                       << 8U) | (IData)(vlSelf->adapter__DOT__x));
+                                       << 8U) | (0xffU 
+                                                 & ((IData)(0xffU) 
+                                                    - (IData)(vlSelf->adapter__DOT__x))));
     } else {
         if ((0xffU == (IData)(vlSelf->adapter__DOT__x))) {
             vlSelf->adapter__DOT__next_x = (0xffU & 0U);

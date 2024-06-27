@@ -17,7 +17,7 @@ verify: $(VERILOG_SRC)
 compile: verify
 	make -j -C $(BUILD_DIR) -f V$(TOP_MODULE).mk V$(TOP_MODULE)
 
-run: compile
+run: compile png2bmp
 	./$(BUILD_DIR)/V$(TOP_MODULE)
 
 png2bmp: res/lenna.png
