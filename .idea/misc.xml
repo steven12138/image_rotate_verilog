@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MakefileSettings">
+    <option name="linkedExternalProjectsSettings">
+      <MakefileProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+          </set>
+        </option>
+        <option name="version" value="2" />
+      </MakefileProjectSettings>
+    </option>
+  </component>
+  <component name="MakefileWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
+  <component name="SVCompilerDirectivesDefines">
+    <option name="define">
+      <map>
+        <entry key="ADDR_SZ">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="87" />
+                    <option name="replacementList" value="20 //Size of RAM address" />
+                    <option name="source" value="sram.v" />
+                  </Body>
+                  <Body>
+                    <option name="offset" value="87" />
+                    <option name="replacementList" value="20 //Size of RAM address" />
+                    <option name="source" value="adapter.v" />
+                  </Body>
+                </list>
+              </option>
+              <option name="dependencies">
+                <set>
+                  <option value="adapter.v" />
+                </set>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="RAM_DEPTH">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="44" />
+                    <option name="replacementList" value="1024*1024 //Depth of RAM" />
+                    <option name="source" value="sram.v" />
+                  </Body>
+                  <Body>
+                    <option name="offset" value="44" />
+                    <option name="replacementList" value="1024*1024 //Depth of RAM" />
+                    <option name="source" value="adapter.v" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="RAM_WIDTH">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="8" />
+                    <option name="replacementList" value="32 //Width of RAM" />
+                    <option name="source" value="sram.v" />
+                  </Body>
+                  <Body>
+                    <option name="offset" value="8" />
+                    <option name="replacementList" value="32 //Width of RAM" />
+                    <option name="source" value="adapter.v" />
+                  </Body>
+                </list>
+              </option>
+              <option name="dependencies">
+                <set>
+                  <option value="adapter.v" />
+                </set>
+              </option>
+            </Define>
+          </value>
+        </entry>
+        <entry key="SRAM_SIZE">
+          <value>
+            <Define>
+              <option name="definitions">
+                <list>
+                  <Body>
+                    <option name="offset" value="8" />
+                    <option name="replacementList" value="256" />
+                    <option name="source" value="sram.v" />
+                  </Body>
+                </list>
+              </option>
+            </Define>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
