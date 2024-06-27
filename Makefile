@@ -9,7 +9,7 @@ SYSTEMC_SRC=$(wildcard *.cpp)
 
 VERILOG_FLAGS= --cc --exe -Wall --top-module $(TOP_MODULE)
 
-all: verify compile run
+all: verify compile png2bmp run
 
 
 verify: $(VERILOG_SRC)
@@ -21,5 +21,11 @@ compile:
 run:
 	./$(BUILD_DIR)/V$(TOP_MODULE)
 
+png2bmp:
+	python converter.py ./res/lenna.png
+
+
 clean:
 	rm -rf $(BUILD_DIR)
+	rm output_lenna.bmp
+	rm ./res/lenna.bmp

@@ -102,8 +102,11 @@ VL_ATTR_COLD void Vadapter___024root___stl_sequent__TOP__0(Vadapter___024root* v
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vadapter___024root___stl_sequent__TOP__0\n"); );
     // Body
     vlSelf->data_out = (0xffffffU & vlSelf->adapter__DOT__mem_out);
-    vlSelf->adapter__DOT__addr = (((IData)(vlSelf->adapter__DOT__x) 
-                                   << 8U) | (IData)(vlSelf->adapter__DOT__y));
+    vlSelf->adapter__DOT__addr = ((IData)(vlSelf->mode)
+                                   ? (((IData)(vlSelf->adapter__DOT__y) 
+                                       << 8U) | (IData)(vlSelf->adapter__DOT__x))
+                                   : (((IData)(vlSelf->adapter__DOT__x) 
+                                       << 8U) | (IData)(vlSelf->adapter__DOT__y)));
 }
 
 VL_ATTR_COLD void Vadapter___024root___eval_triggers__stl(Vadapter___024root* vlSelf);
@@ -122,6 +125,21 @@ VL_ATTR_COLD bool Vadapter___024root___eval_phase__stl(Vadapter___024root* vlSel
     }
     return (__VstlExecute);
 }
+
+#ifdef VL_DEBUG
+VL_ATTR_COLD void Vadapter___024root___dump_triggers__ico(Vadapter___024root* vlSelf) {
+    (void)vlSelf;  // Prevent unused variable warning
+    Vadapter__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vadapter___024root___dump_triggers__ico\n"); );
+    // Body
+    if ((1U & (~ vlSelf->__VicoTriggered.any()))) {
+        VL_DBG_MSGF("         No triggers active\n");
+    }
+    if ((1ULL & vlSelf->__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 0 is active: Internal 'ico' trigger - first iteration\n");
+    }
+}
+#endif  // VL_DEBUG
 
 #ifdef VL_DEBUG
 VL_ATTR_COLD void Vadapter___024root___dump_triggers__act(Vadapter___024root* vlSelf) {

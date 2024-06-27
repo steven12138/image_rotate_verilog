@@ -26,6 +26,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vadapter___024root final : public VerilatedMo
     CData/*7:0*/ adapter__DOT__y;
     CData/*7:0*/ adapter__DOT__img_width;
     CData/*0:0*/ __VstlFirstIteration;
+    CData/*0:0*/ __VicoFirstIteration;
     CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__rst__0;
     CData/*0:0*/ __VactContinue;
@@ -37,6 +38,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vadapter___024root final : public VerilatedMo
     IData/*31:0*/ __VactIterCount;
     VlUnpacked<IData/*31:0*/, 1048576> adapter__DOT__ram__DOT__mem;
     VlTriggerVec<1> __VstlTriggered;
+    VlTriggerVec<1> __VicoTriggered;
     VlTriggerVec<2> __VactTriggered;
     VlTriggerVec<2> __VnbaTriggered;
 
