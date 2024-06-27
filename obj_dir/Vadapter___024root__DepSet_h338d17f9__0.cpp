@@ -34,10 +34,10 @@ VL_INLINE_OPT void Vadapter___024root___ico_sequent__TOP__0(Vadapter___024root* 
                                              + (IData)(vlSelf->adapter__DOT__x)));
             vlSelf->adapter__DOT__next_y = (0xffU & (IData)(vlSelf->adapter__DOT__y));
         }
-        vlSelf->adapter__DOT__addr = (((IData)(vlSelf->adapter__DOT__y) 
-                                       << 8U) | (0xffU 
-                                                 & ((IData)(0xffU) 
-                                                    - (IData)(vlSelf->adapter__DOT__x))));
+        vlSelf->adapter__DOT__addr = ((0xff00U & (((IData)(0xffU) 
+                                                   - (IData)(vlSelf->adapter__DOT__y)) 
+                                                  << 8U)) 
+                                      | (IData)(vlSelf->adapter__DOT__x));
     } else {
         if ((0xffU == (IData)(vlSelf->adapter__DOT__x))) {
             vlSelf->adapter__DOT__next_x = (0xffU & 0U);
@@ -163,10 +163,10 @@ VL_INLINE_OPT void Vadapter___024root___nba_sequent__TOP__1(Vadapter___024root* 
                                              + (IData)(vlSelf->adapter__DOT__x)));
             vlSelf->adapter__DOT__next_y = (0xffU & (IData)(vlSelf->adapter__DOT__y));
         }
-        vlSelf->adapter__DOT__addr = (((IData)(vlSelf->adapter__DOT__y) 
-                                       << 8U) | (0xffU 
-                                                 & ((IData)(0xffU) 
-                                                    - (IData)(vlSelf->adapter__DOT__x))));
+        vlSelf->adapter__DOT__addr = ((0xff00U & (((IData)(0xffU) 
+                                                   - (IData)(vlSelf->adapter__DOT__y)) 
+                                                  << 8U)) 
+                                      | (IData)(vlSelf->adapter__DOT__x));
     } else {
         if ((0xffU == (IData)(vlSelf->adapter__DOT__x))) {
             vlSelf->adapter__DOT__next_x = (0xffU & 0U);

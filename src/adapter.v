@@ -70,7 +70,7 @@ module adapter(
     end
 
     // Transform the address for 90-degree rotation
-    assign addr = (mode == 1'b0) ? {4'b0, x, y}:{4'b0, y, 8'd255-x};
+    assign addr = (mode == 1'b0) ? {4'b0, x, y}:{4'b0, 8'd255-y, x};
     assign mem_in = {8'b0, data_in};
     assign data_out = mem_out[23:0];
 
