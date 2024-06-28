@@ -30,21 +30,16 @@
               <option name="definitions">
                 <list>
                   <Body>
-                    <option name="offset" value="87" />
-                    <option name="replacementList" value="20 //Size of RAM address" />
-                    <option name="source" value="sram.v" />
-                  </Body>
-                  <Body>
                     <option name="offset" value="89" />
                     <option name="replacementList" value="20 // Size of RAM address" />
                     <option name="source" value="adapter.v" />
                   </Body>
+                  <Body>
+                    <option name="offset" value="87" />
+                    <option name="replacementList" value="20 //Size of RAM address" />
+                    <option name="source" value="sram.v" />
+                  </Body>
                 </list>
-              </option>
-              <option name="dependencies">
-                <set>
-                  <option value="adapter.v" />
-                </set>
               </option>
             </Define>
           </value>
@@ -55,14 +50,14 @@
               <option name="definitions">
                 <list>
                   <Body>
-                    <option name="offset" value="44" />
-                    <option name="replacementList" value="1024*1024 //Depth of RAM" />
-                    <option name="source" value="sram.v" />
-                  </Body>
-                  <Body>
                     <option name="offset" value="45" />
                     <option name="replacementList" value="1024*1024 // Depth of RAM" />
                     <option name="source" value="adapter.v" />
+                  </Body>
+                  <Body>
+                    <option name="offset" value="44" />
+                    <option name="replacementList" value="1024*1024 //Depth of RAM" />
+                    <option name="source" value="sram.v" />
                   </Body>
                 </list>
               </option>
@@ -76,32 +71,12 @@
                 <list>
                   <Body>
                     <option name="offset" value="8" />
-                    <option name="replacementList" value="32 //Width of RAM" />
-                    <option name="source" value="sram.v" />
-                  </Body>
-                  <Body>
-                    <option name="offset" value="8" />
                     <option name="replacementList" value="32 // Width of RAM" />
                     <option name="source" value="adapter.v" />
                   </Body>
-                </list>
-              </option>
-              <option name="dependencies">
-                <set>
-                  <option value="adapter.v" />
-                </set>
-              </option>
-            </Define>
-          </value>
-        </entry>
-        <entry key="SRAM_SIZE">
-          <value>
-            <Define>
-              <option name="definitions">
-                <list>
                   <Body>
                     <option name="offset" value="8" />
-                    <option name="replacementList" value="256" />
+                    <option name="replacementList" value="32 //Width of RAM" />
                     <option name="source" value="sram.v" />
                   </Body>
                 </list>
@@ -111,5 +86,6 @@
         </entry>
       </map>
     </option>
+    <option name="version" value="195" />
   </component>
 </project>

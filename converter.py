@@ -9,7 +9,7 @@ def convert_png_to_bmp(input_path, size=(256, 256)):
     # Open the input PNG image
     with Image.open(input_path) as img:
         # Convert the image to 8-bit grayscale
-        img = img.convert("L")
+        # img = img.convert("L")
         # Resize the image to 256x256
         img = img.resize(size, Image.LANCZOS)
         # Save the image as BMP
