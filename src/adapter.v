@@ -9,7 +9,7 @@ module adapter(
     input [23:0] data_in, // 8bit-rgb image
 
     output reg [23:0] data_out,
-    output reg jump_out,
+    output reg jump_out, // New output signal
     output reg output_done // New output signal
 );
 
